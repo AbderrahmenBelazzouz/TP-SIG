@@ -1,0 +1,165 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.0
+-- Dumped by pg_dump version 14.0
+
+-- Started on 2021-11-29 16:05:59
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 2 (class 3079 OID 16395)
+-- Name: postgis; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA public;
+
+
+--
+-- TOC entry 4191 (class 0 OID 0)
+-- Dependencies: 2
+-- Name: EXTENSION postgis; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION postgis IS 'PostGIS geometry and geography spatial types and functions';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 217 (class 1259 OID 17626)
+-- Name: batiment; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.batiment (
+    id integer NOT NULL,
+    description character varying,
+    geom public.geometry
+);
+
+
+ALTER TABLE public.batiment OWNER TO postgres;
+
+--
+-- TOC entry 216 (class 1259 OID 17417)
+-- Name: communes_l72; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.communes_l72 (
+    gid integer NOT NULL,
+    name character varying(70),
+    nsi integer,
+    geom public.geometry(MultiPolygon,31370)
+);
+
+
+ALTER TABLE public.communes_l72 OWNER TO postgres;
+
+--
+-- TOC entry 215 (class 1259 OID 17416)
+-- Name: communes_l72_gid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.communes_l72_gid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.communes_l72_gid_seq OWNER TO postgres;
+
+--
+-- TOC entry 4192 (class 0 OID 0)
+-- Dependencies: 215
+-- Name: communes_l72_gid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.communes_l72_gid_seq OWNED BY public.communes_l72.gid;
+
+
+--
+-- TOC entry 4032 (class 2604 OID 17420)
+-- Name: communes_l72 gid; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.communes_l72 ALTER COLUMN gid SET DEFAULT nextval('public.communes_l72_gid_seq'::regclass);
+
+
+--
+-- TOC entry 4185 (class 0 OID 17626)
+-- Dependencies: 217
+-- Data for Name: batiment; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.batiment (id, description, geom) VALUES (1, 'Batiment de Physique', '01010000208A7A00002431213224A90C410011E8709B530141');
+
+
+--
+-- TOC entry 4184 (class 0 OID 17417)
+-- Dependencies: 216
+-- Data for Name: communes_l72; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.communes_l72 (gid, name, nsi, geom) VALUES (1, 'Aartselaar', 11001, .....)
+..............................;
+
+
+--
+-- TOC entry 4030 (class 0 OID 16702)
+-- Dependencies: 211
+-- Data for Name: spatial_ref_sys; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 4193 (class 0 OID 0)
+-- Dependencies: 215
+-- Name: communes_l72_gid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.communes_l72_gid_seq', 589, true);
+
+
+--
+-- TOC entry 4038 (class 2606 OID 17632)
+-- Name: batiment batiment_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.batiment
+    ADD CONSTRAINT batiment_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4036 (class 2606 OID 17422)
+-- Name: communes_l72 communes_l72_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.communes_l72
+    ADD CONSTRAINT communes_l72_pkey PRIMARY KEY (gid);
+
+
+-- Completed on 2021-11-29 16:06:02
+
+--
+-- PostgreSQL database dump complete
+--
+
+
+

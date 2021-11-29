@@ -1,0 +1,2 @@
+select name from public communes-l72 
+where ST-Within (( select geom from public batiment where description = 'Bâtiment de Physique'), geom);
